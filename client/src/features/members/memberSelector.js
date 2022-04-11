@@ -1,0 +1,1 @@
+export const member = (state) => state.members.member;

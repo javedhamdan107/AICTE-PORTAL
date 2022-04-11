@@ -5,8 +5,24 @@
     margin-top: 10px;
 }
 
+.signin-btn{
+    min-width: 100px !important;
+    background-color: #e8552b !important;
+    border: #e8552b !important;
+}
+.signin-btn:focus{
+    box-shadow: none !important;
+}
 
-.header{
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
+.login-form-container{
+    min-height: 100vh !important;
+    margin: 0 !important;
+}
+
+.signin-box{
+    min-height: 100vh !important;
+}
+
+.signin-box-color{
+    background-color: #0e263c !important;
 }
