@@ -1,11 +1,11 @@
 import passport from 'passport';
 
 import User from '../models/user.js';
-import { createUser } from '../services/users-service.js';
+import { createUser } from '../services/user-service.js';
 
 export const signupHandler = async (req, res, next) => {
     try {
-      const { userType, email, firstName, lastName } = req.body;
+      const { userType, email, name } = req.body;
       const existingUser = await User.findOne({ email });
   
       if (existingUser) {
@@ -23,7 +23,7 @@ export const signupHandler = async (req, res, next) => {
           if (error) {
             return next(error);
           }
-          return res.status(200).json({ id: user._id, userType, firstName, lastName });
+          return res.status(200).json({ id: user._id, userType, name });
         });
       })(req, res, next);
     } catch (error) {
