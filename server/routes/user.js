@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { signupHandler, signinHandler,createvenueHandler } from '../handlers/user.js';
+import { signupHandler, signinHandler, createvenueHandler, createCanteenHandler } from '../handlers/user.js';
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ const router = express.Router();
 router.post('/signup', signupHandler);
 router.post('/signin', signinHandler);
 router.post('/venue/create', createvenueHandler);
+router.post('/canteen/create', createCanteenHandler);
 
 export default router;
