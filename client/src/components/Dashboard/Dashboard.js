@@ -62,7 +62,7 @@ export default function Dashboard() {
             <Container className='container'>
                 <Row xs={1} sm={2} className='buttons'>
                     <Col>
-                        <Button variant='primary' size='lg'>
+                        <Button variant='primary' size='lg' className='view-btn'>
                             View
                         </Button>
                     </Col>
