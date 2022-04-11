@@ -12,7 +12,6 @@ export const signupHandler = async (req, res, next) => {
       if (existingUser) {
         return res.status(409).json({ message: 'User already exists!' });
       }
-  
 
       await createUser(req.body);
 
