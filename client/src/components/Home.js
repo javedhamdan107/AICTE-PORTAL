@@ -1,7 +1,12 @@
 import React from 'react';
+import Header from './Header/Header';
 
 const Home = () => {
-    return <h1>Alby</h1>;
+    return (
+        <div>
+            <Header/>
+        </div>
+    );
 }
 
 export default Home;
