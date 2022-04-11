@@ -1,4 +1,11 @@
 .booking-calendar{
     width: 50% !important;
 }
+/* .react-calendar__tile--now,.react-calendar__tile--now:enabled:hover{
+    background: none !important;
+} */
+.react-calendar__tile--active{
+    color: #1010104D !important;
+}
+
 
