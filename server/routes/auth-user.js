@@ -6,4 +6,5 @@ const router = express.Router();
 
 router.post('/member/create', createMemberHandler);
 
+
 export default router;
