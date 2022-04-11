@@ -5,7 +5,7 @@ import { createMember } from '../services/auth-user-service.js';
 
 export const createMemberHandler = async (req, res, next) => {
     try {
-      const { mobileNum, email, name } = req.body;
+      const { mobileNum, email, name, typeId } = req.body;
       const existingUserEmail = await Member.findOne({ email });
       const existingUserMob = await Member.findOne({ mobileNum });
   
