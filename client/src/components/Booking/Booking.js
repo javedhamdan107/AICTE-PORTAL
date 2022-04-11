@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Container, Col, Button,Row } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import EventForm from "../EventForm/EventForm";
 import './Booking.css'
 import { booking } from "../../features/booking/bookingSelector";
+import Header from "../Header/Header";
 
 const Booking = () => {
 
@@ -31,7 +32,11 @@ const Booking = () => {
   };
 
   return (
+    <>
+    <Header/>
+    
     <Container >
+      
       <Row xs={1} md={2}>
         <Col className="my-3 d-flex d-md-block justify-content-center">
           <Calendar onChange={setValue} value={value} tileDisabled={disableDay} view="month"/>
@@ -42,6 +47,7 @@ const Booking = () => {
         </Col>
       </Row>
     </Container>
+    </>
   );
 };
 

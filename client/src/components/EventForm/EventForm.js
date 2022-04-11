@@ -123,7 +123,7 @@ const EventForm = ({ year, month, day,setError }) => {
         </>
       )}
       <Row className="d-flex justify-content-center m-4" >
-      <Button variant="primary" type="submit" >
+      <Button variant="primary" type="submit" className="submit-btn" >
         Submit
       </Button>
       </Row>
