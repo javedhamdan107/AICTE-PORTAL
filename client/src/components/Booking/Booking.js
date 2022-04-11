@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Container, Col, Button,Row } from "react-bootstrap";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import EventForm from "../EventForm/EventForm";
 import './Booking.css'
+import { booking } from "../../features/booking/bookingSelector";
 
 const Booking = () => {
+
+  const bookingDetails = useSelector(booking);
+  console.log(bookingDetails);
+
   const booked = ["2022-04-24", "2022-04-25", "2022-04-26", "2022-04-27"];
 
   const [value, setValue] = useState(new Date());

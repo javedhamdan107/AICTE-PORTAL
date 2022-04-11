@@ -1,0 +1,1 @@
+export const booking = (state) => state.bookings.booking;
