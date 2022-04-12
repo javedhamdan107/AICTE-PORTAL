@@ -83,17 +83,12 @@ export default function Dashboard() {
             <Container className='container'>
                 <Row xs={1} sm={2} className='buttons'>
                     <Col>
-<<<<<<< Updated upstream
-                        <Button variant='primary' size='lg' className='view-btn'>
-                            View
-=======
-                        <Button variant='primary' size='lg' onClick={handleView}>
-                            View Bookings
->>>>>>> Stashed changes
+                        <Button className='buttonColor1' size='lg' onClick={handleView}>
+                            Activity Log
                         </Button>
                     </Col>
                     <Col>
-                        <Button variant='secondary' size='lg' onClick={handleClick}>
+                        <Button className='buttonColor2' size='lg' onClick={handleClick}>
                             Book an Event
                         </Button>
                     </Col>
