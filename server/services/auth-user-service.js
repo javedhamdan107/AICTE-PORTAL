@@ -16,7 +16,7 @@ export const createMember = async (userDetails) => {
   };
 
   export const createBooking = async (userDetails) => {
-    const { userId, venueId, eventName, eventDate, startTime, description, isCanteen, isBreakfast, isLunch, isDinner, expCount } = userDetails;
+    const { userId, venueId, eventName, eventDate, startTime, description, isCanteen, mealType, expCount } = userDetails;
 
     const { _doc: booking } = await Booking.create({
         userId,
@@ -26,8 +26,11 @@ export const createMember = async (userDetails) => {
         startTime,
         description,
         isCanteen,
-        expCount
+        expCount,
+        mealType
       });
+
+      return booking;
   }
 
   

@@ -20,8 +20,8 @@ export const createUser = async (userDetails) => {
 
   export const mergeUserDetails = (userOfType, user) => {
     // create an full user object with non-confidential details
-    const { firstName, lastName, userType, image } = user;
-    const safeDetails = { ...userOfType, firstName, lastName, userType, image };
+    const { firstName, lastName, userType, image, description } = user;
+    const safeDetails = { ...userOfType, firstName, lastName, userType, image, description };
 
     return safeDetails;
   };

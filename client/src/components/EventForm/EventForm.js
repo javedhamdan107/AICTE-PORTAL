@@ -1,21 +1,33 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 import { Container, Form, Col, Row, Button } from "react-bootstrap";
 import "./EventForm.css";
 
+import { user } from "../../features/user/userSelectors";
+import { venue } from "../../features/venues/venueSelectors";
+import { createBookings } from "../../features/booking/bookingSlice";
+
 const EventForm = ({ year, month, day,setError }) => {
+
+  const userDetails = useSelector(user);
+  const venueDetails = useSelector(venue);
+
+  const dispatch = useDispatch();
+
   const [meeting, setMeeting] = useState({
-    eventname: "",
-    venue: "",
-    time: "",
+    eventName: "",
+    venueId: venueDetails[0]._id,
+    startTime: "",
     description: "",
-    canteen: false,
-    count: 0,
-    mealtype: "Refreshment"
+    isCanteen: false,
+    expCount: 0,
+    mealType: "Refreshment"
   });
   
   const handleChange = (e) => {
-    if (e.target.name === "canteen") {
-      setMeeting({ ...meeting, [e.target.name]: !meeting.canteen });
+    if (e.target.name === "isCanteen") {
+      setMeeting({ ...meeting, [e.target.name]: !meeting.isCanteen });
     } else {
       setMeeting({ ...meeting, [e.target.name]: e.target.value });
     }
@@ -29,8 +41,24 @@ const EventForm = ({ year, month, day,setError }) => {
     if(today === eventdate){
         setError("Choose a free slot to book meeting*")
     }else{
-        setError("")
-        console.log(meeting,eventdate);
+        setError("");
+        const bookingDetails = {
+          userId : userDetails._id,
+          eventName : meeting.eventName,
+          venueId : meeting.venueId,
+          startTime : meeting.startTime,
+          description : meeting.description,
+          isCanteen : meeting.isCanteen,
+          expCount : meeting.expCount,
+          mealType : meeting.mealType,
+          eventDate : eventdate
+        }
+
+        console.log(bookingDetails);
+        
+        dispatch(createBookings(bookingDetails));
+        dispatch(push("/user/dashboard"));
+        
     }
   };
 
@@ -41,8 +69,8 @@ const EventForm = ({ year, month, day,setError }) => {
         <Form.Control
           type="text"
           placeholder="Event Name"
-          name="eventname"
-          value={meeting.eventname}
+          name="eventName"
+          value={meeting.eventName}
           onChange={handleChange}
           required
         />
@@ -51,24 +79,31 @@ const EventForm = ({ year, month, day,setError }) => {
         <Form.Label>Venue</Form.Label>
         <Form.Control
           as="select"
-          name="venue"
+          name="venueId"
           value={meeting.venue}
           onChange={handleChange}
           required
         >
-          <option>1</option>
+          {
+            venueDetails.map((ven) => {
+              return(
+                <option value={ven._id}>{ven.name}, {ven.location}</option>
+              )
+            })
+          }
+          {/* <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
-          <option>5</option>
+          <option>5</option> */}
         </Form.Control>
       </Form.Group>
       <Form.Group>
       <Form.Label>Time</Form.Label>
           <Form.Control
             type="time"
-            name="time"
-            value={meeting.time}
+            name="startTime"
+            value={meeting.startTime}
             onChange={handleChange}
             required
           />
@@ -89,19 +124,19 @@ const EventForm = ({ year, month, day,setError }) => {
           type="checkbox"
           id="canteencheckbox"
           label="Canteen Facility"
-          name="canteen"
-          value={meeting.canteen}
+          name="isCanteen"
+          value={meeting.isCanteen}
           onChange={handleChange}
         />
       </Form.Group>
-      {meeting.canteen && (
+      {meeting.isCanteen && (
         <>
           <Form.Group className="my-3">
             <Form.Label>Meal Type</Form.Label>
             <Form.Control
               as="select"
               name="mealtype"
-              value={meeting.mealtype}
+              value={meeting.mealType}
               onChange={handleChange}
               required
             >
@@ -114,8 +149,8 @@ const EventForm = ({ year, month, day,setError }) => {
             <Form.Label>Expected Count</Form.Label>
             <Form.Control
               type="number"
-              name="count"
-              value={meeting.count}
+              name="expCount"
+              value={meeting.expCount}
               onChange={handleChange}
               required
             />

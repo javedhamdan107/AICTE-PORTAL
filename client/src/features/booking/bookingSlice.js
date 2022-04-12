@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { viewBookingsAPI } from './bookingAPIs';
+import { createBookingsAPI, viewBookingsAPI } from './bookingAPIs';
 
 const initialState = { booking: null };
 
@@ -15,6 +15,18 @@ export const viewBookings = createAsyncThunk(
     },
   );
 
+  export const createBookings = createAsyncThunk(
+    'bookings/createBookings',
+    async ( data, thunkAPI ) => {
+      try {
+        const result = await createBookingsAPI(data);
+        return result.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
+    },
+  );
+
   export const bookingSlice = createSlice({
     name: 'bookings',
     initialState,
@@ -23,6 +35,9 @@ export const viewBookings = createAsyncThunk(
     },
     extraReducers: {
       [viewBookings.fulfilled]: (state, action) => {
+        state.booking = action.payload;
+      },
+      [createBookings.fulfilled]: (state, action) => {
         state.booking = action.payload;
       },
     },

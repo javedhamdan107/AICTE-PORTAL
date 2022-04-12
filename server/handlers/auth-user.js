@@ -29,10 +29,10 @@ export const createMemberHandler = async (req, res, next) => {
 
   export const createBookingHandler = async (req, res, next) => {
     try {
-        const { userId, venueId, eventName, eventDate, startTime, description, isCanteen, isBreakfast, isLunch, isDinner, expCount } = req.body;
-
+        const { userId, venueId, eventName, eventDate, startTime, description, isCanteen, expCount, mealType } = req.body;
+        console.log(req.body);
         const booking = await createBooking(req.body);
-
+        console.log(booking);
         return res.json(booking);
     } catch (error) {
         return next(error);
