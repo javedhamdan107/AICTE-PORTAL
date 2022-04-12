@@ -1,0 +1,1 @@
+export const venue = (state) => state.venues.venue;
