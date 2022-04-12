@@ -11,9 +11,7 @@ const bookingSchema = mongoose.Schema({
     startTime : {type: String, required: true},
     description : { type: String, required: true },
     isCanteen : { type: Boolean, required: true },
-    isBreakfast : { type: Boolean, required: true, default: false },
-    isLunch : { type: Boolean, required: true, default: false },
-    isDinner : { type: Boolean, required: true, default: false },
+    mealType : { type: String, required: false },
     expCount : {type: Number, required: false},
 
 

@@ -1,19 +1,53 @@
+<<<<<<< Updated upstream
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
+=======
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Col, Button,Row } from "react-bootstrap";
+>>>>>>> Stashed changes
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import EventForm from "../EventForm/EventForm";
 import './Booking.css'
 import { booking } from "../../features/booking/bookingSelector";
+<<<<<<< Updated upstream
 import Header from "../Header/Header";
+=======
+import { authenticate } from "../../features/user/userSlice";
+import { viewBookings } from "../../features/booking/bookingSlice";
+import { findMembers } from "../../features/members/memberSlice";
+import { viewVenues } from "../../features/venues/venueSlice";
+import StateLoader from "../loaders/StateLoader";
+import Header from '../Header/Header';
+>>>>>>> Stashed changes
 
 const Booking = () => {
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const bookingDetails = useSelector(booking);
   console.log(bookingDetails);
+  useEffect(() => {
+    if (bookingDetails != null) {
+      setLoading(false);
+    } else {
+      dispatch(authenticate()).then((user) => {
+        setLoading(false);
+        dispatch(viewBookings());
+        dispatch(findMembers({ userId: user.payload._id }));
+      });
+      dispatch(viewVenues());
+    }
+  }, [setLoading]);
 
-  const booked = ["2022-04-24", "2022-04-25", "2022-04-26", "2022-04-27"];
+  const booked = [];
+  if(bookingDetails != null ){
+    bookingDetails.map((detail) => booked.push(detail.eventDate.substring(0,10)))
+  }
+  // const booked = ["2022-04-24", "2022-04-25", "2022-04-26", "2022-04-27"];
 
   const [value, setValue] = useState(new Date());
   const [error, setError] = useState("")
@@ -31,10 +65,18 @@ const Booking = () => {
     return false;
   };
 
+  if (loading) {
+    return <StateLoader/>;
+  }
+
   return (
     <>
+<<<<<<< Updated upstream
     <Header/>
     
+=======
+    <Header />
+>>>>>>> Stashed changes
     <Container >
       
       <Row xs={1} md={2}>

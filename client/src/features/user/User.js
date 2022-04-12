@@ -3,6 +3,7 @@ import {
   Switch, Route, useRouteMatch, Redirect,
 } from 'react-router-dom';
 import Booking from '../../components/Booking/Booking';
+import ViewBookings from '../../components/Booking/ViewBookings';
 import Dashboard from '../../components/Dashboard/Dashboard';
 import Login from '../../components/Login/Login';
 import { ProtectedRoute } from '../../helpers/routes';
@@ -17,6 +18,9 @@ const User = () => {
         </ProtectedRoute>
         <ProtectedRoute exact path={`${path}/booking`}>
             <Booking />
+        </ProtectedRoute>
+        <ProtectedRoute exact path={`${path}/viewBooking`}>
+            <ViewBookings />
         </ProtectedRoute>
         <Redirect from="*" to="/error/not-found" />
     </Switch>
